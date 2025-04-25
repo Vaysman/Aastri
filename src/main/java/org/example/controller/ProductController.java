@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/product")
 @AllArgsConstructor
 public class ProductController {
 
@@ -26,12 +27,12 @@ public class ProductController {
         return new ResponseEntity<>(productService.readAll(), HttpStatus.OK);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Product> update(@RequestBody Product product) {
         return new ResponseEntity<>(productService.update(product), HttpStatus.OK);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public HttpStatus delete(@PathVariable Long id) {
         productService.delete(id);
         return HttpStatus.OK;

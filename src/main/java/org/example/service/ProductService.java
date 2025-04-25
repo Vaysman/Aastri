@@ -1,5 +1,6 @@
 package org.example.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.example.dto.ProductDTO;
 import org.example.entity.Product;
@@ -30,6 +31,9 @@ public class ProductService {
     }
 
     public void delete(Long id) {
+        if (!productRepository.existsById(id)) {
+            throw new EntityNotFoundException("Product not found with id " + id);
+        }
         productRepository.deleteById(id);
     }
 }
